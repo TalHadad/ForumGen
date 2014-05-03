@@ -7,9 +7,11 @@ import junit.framework.TestCase;
 public class ForumTests extends TestCase {
 	
 	protected ForumBridge bridge;
+	private int x;
 	
 	public ForumTests(){
         super();
+        x=0;
     }
 
     public ForumTests(String name){

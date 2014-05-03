@@ -9,6 +9,9 @@ public class WatchSubForumsTest extends ForumTests {
 
 	@Test
     public void testgetSubForumList(){
+		int i;
+		int j;
+		
 		Vector<String> subforums = this.bridge.getAllSubForums("Software Engineer");
 		int size = subforums.size();
 		this.bridge.createSubForum("Vali", "Software Engineer", "Sadna");

@@ -6,7 +6,7 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 public class AllTests {
-	
+	// git test
 	private static Vector<TestSuite> suiteVec;
 	private static String testName;
 	private static String suiteName;

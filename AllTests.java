@@ -12,7 +12,7 @@ public class AllTests {
 	private static String suiteName;
 
 	public static void main(String[] args) {
-		//version 1:
+		//version 1.0:
 		junit.textui.TestRunner.run(suite());
 		//initVec();
 		// Runs an entire TestSuite using text UI

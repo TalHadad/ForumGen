@@ -12,7 +12,7 @@ public interface ServerHandlerInterface {
 
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg || conf.PENDING) 
 	// decided by forum policy. might get pending until validation by mail.
-	public String registerToForum(String forumName, String userName,
+	public String registerToForum(String userName, String forumName,
 			String password, String Email, String remainderQues, String remainderAns);
 
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg || conf.PENDING)
@@ -30,12 +30,15 @@ public interface ServerHandlerInterface {
 	public String getThreads(String forumName,String subForumName) ;
 
 	// returns the content of a post specified by ID(unique by subForum)
-	public String getPostContent(String ID, String subForumName, String forumName);
+	public String getThreadContent(String treadID, String subForumName, String forumName);
+
+	// returns the content of a post specified by ID(unique by subForum)
+	public String getResponseContent(String treadID, String responseId, String String id String subForumName, String forumName);
 
 	// entering to the post will return string of pairs, post title delim2 id, pairs are separeted by conf.delim1
 	// sending ID of the openning post.
 	public String getThreadResponses(String forumName,
-			String subForumName, String ID);
+			String subForumName, String id);
 
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)
 	// server side has to check if the new thread content matches the sub forum subject
@@ -46,10 +49,10 @@ public interface ServerHandlerInterface {
 	// server side has to check if the response content matches the sub forum subject
 	public String postThreadResponse(String responseContent,
 			String currentThreadTitle, String forumName,
-			String subForumName, String userName, String ID);
+			String subForumName, String userName, String id);
 
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)
-	public String deleteThread(String ID, String subForum, String Forum);
+	public String deleteThread(String id, String subForum, String Forum);
 
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)			NEED TO CHECK ID
 	public String deleteThreadResponse(String postID,
@@ -93,10 +96,10 @@ public interface ServerHandlerInterface {
 	public String banMember(String userName, String forumName, String memberToBanName);
 
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)
-	public String editOpenningPost(String userName, String forum, String subForum, String openningPostID, String newText);
+	public String editTread(String userName, String forum, String subForum, String treadID, String newText);
 
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)
-	public String editResponse(String userName, String forum, String subForum, String openningPostID, String responseID, String newText);
+	public String editResponse(String userName, String forum, String subForum, String treadID, String responseID, String newText);
 
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)
 	public String upgradeToModerator (String userName, String forum, String subForum, String moderatorUserName);
@@ -118,10 +121,11 @@ public interface ServerHandlerInterface {
 	public String replaceModerator (String userName, String forum, String newModeratorName, String oldModerator);
 
 	// expecting to receive (conf.SUCCESS msg|| conf.FAIL msg)
+	// return "Total posts: <num>, Threads: <num>"
 	public String numOfPostsInSubForumReport (String userName, String forum, String subForum);
 
 	// expecting to receive (conf.SUCCESS msg|| conf.FAIL msg)
-	//<userName> is Admin
+	//<userName> is Admin, return all type of posts
 	public String postsOfMemberReport (String userName, String forum, String memberName);
 
 	// expecting to receive (conf.SUCCESS msg|| conf.FAIL msg)

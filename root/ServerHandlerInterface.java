@@ -1,6 +1,4 @@
-package ListenerServer.protocol;
-
-import java.util.Vector;
+package TestPackage;
 
 public interface ServerHandlerInterface {
 
@@ -33,7 +31,7 @@ public interface ServerHandlerInterface {
 	public String getThreadContent(String treadID, String subForumName, String forumName);
 
 	// returns the content of a post specified by ID(unique by subForum)
-	public String getResponseContent(String treadID, String responseId, String String id String subForumName, String forumName);
+	public String getResponseContent(String treadID, String responseId, String id, String subForumName, String forumName);
 
 	// entering to the post will return string of pairs, post title delim2 id, pairs are separeted by conf.delim1
 	// sending ID of the openning post.
@@ -75,7 +73,7 @@ public interface ServerHandlerInterface {
     public String removeAdminFromForum(String forumName, String adminName);
 
 
---------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
 
 	// expecting to return conf.SUCCESS || conf.FAIL
 	public String validateByEmail(String userName, String code);
@@ -141,7 +139,7 @@ public interface ServerHandlerInterface {
 	// *** need to check what is suspention policy for members described in the first demand form. ***
 	public String setPolicy(String forumName, String userName, String hasEmailPolicy, String extendedDeletionPolicy,
 			String policyForUpdatingRank, String minPostForModerator, String minSeniorityMonths, String onlyApointAdministratorCanRemoveModerators, 
-			String String canRemoveSingleModerators, String expirationDateForPassword, String interactiveNotifyingPolicyS);
+			String canRemoveSingleModerators, String expirationDateForPassword, String interactiveNotifyingPolicyS);
 
 	// only superAdmin can execute this func.
 	// expecting to receive (conf.SUCCESS msg|| conf.FAIL msg)
@@ -189,8 +187,8 @@ public interface ServerHandlerInterface {
 	//public String enterNewProperty(String forumName,String property, String newValue, String userName, String password) ;
 
 
-****************************
-messages from server to client
+//****************************
+//messages from server to client
 
 	// a message sent to the member from the server. used in several ways.
 	// when a member publishes a msg, his friends will get a msg from the server.

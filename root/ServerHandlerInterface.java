@@ -13,7 +13,7 @@ public interface ServerHandlerInterface {
 	public String registerToForum(String userName, String forumName,
 			String password, String Email, String remainderQues, String remainderAns);
 
-	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg || conf.PENDING)
+	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg || conf.PENDING_STR)
 	// if pending, need to pop a code validation window.
 	public String login(String forumName, String userName, String password) ;
 

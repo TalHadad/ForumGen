@@ -13,7 +13,8 @@ public class Configuration {
 	
 	public static final String FAIL = "FAIL";
 	public static final String SUCCESS = "SUCCESS";
-	
+	public static final String PENDING_STR = "PENDING";
+
 	public static final String TRUE = "TRUE";
 	public static final String FALSE = "FALSE";
 	
@@ -23,7 +24,7 @@ public class Configuration {
 
 	public static final String DELIMITER1 = "@@";
 	public static final String DELIMITER2 = "!!";
-
+	
 	public static final String IP = "192.168.1.104";
     public static final int PORT = 8889;
 	

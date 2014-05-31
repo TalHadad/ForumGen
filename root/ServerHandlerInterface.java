@@ -75,7 +75,7 @@ public interface ServerHandlerInterface {
     
     // 7
 	// expecting to return conf.SUCCESS || conf.FAIL
-	public String validateByEmail(String userName, String code);
+	public String validateByEmail(String userName,String forumName, String code);
 	
 	// 8
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)

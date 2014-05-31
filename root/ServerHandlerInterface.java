@@ -57,12 +57,6 @@ public interface ServerHandlerInterface {
 	public String registerToForum(String userName, String forumName,
 			String password, String email, String remainderQues, String remainderAns);
 
-<<<<<<< HEAD
-	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg || conf.PENDING_STR)
-=======
-	// 3
-	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg || conf.PENDING)
->>>>>>> 015b6bb55d3d4e5c65a61c1896c024541c7efd25
 	// if pending, need to pop a code validation window.
 	public String login(String forumName, String userName, String password) ;
 
@@ -85,18 +79,11 @@ public interface ServerHandlerInterface {
 	
 	// 8
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)
-<<<<<<< HEAD
 	// server side has to check if the response content matches the sub forum subject
-	public String postThreadResponse(String responseTitle,
-			String responseContent, String forumName,
-			String subForumName, String userName, String ThreadID);
-
-=======
 	//** need to make sure about policy. perhaps members can be banned automaticaly because of policy
 	public String banMember(String userName, String forumName, String memberToBanName);
 	
 	// 9
->>>>>>> 015b6bb55d3d4e5c65a61c1896c024541c7efd25
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)
 	// changing <userName> status to member and promot <newAdminUserName> to Administrator
 	public String replaceAdmin (String userName, String forum, String newAdminUserName);

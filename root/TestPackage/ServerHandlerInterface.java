@@ -1,4 +1,4 @@
-package Connection.protocol;
+package TestPackage;
 //Fina3
 public interface ServerHandlerInterface {
 

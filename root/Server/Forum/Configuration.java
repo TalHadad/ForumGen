@@ -2,6 +2,9 @@ package Forum;
 
 public class Configuration {
 	
+	public static final String IP = "192.168.1.104";
+    public static final int PORT = 8889;
+
 	public static final int SUPERADMINISTRATOR = 0;
 	public static final int ADMINISTRATOR = 1;
 	public static final int MODERATOR = 2;

@@ -1,5 +1,5 @@
 package Connection.protocol;
-//Final
+//Final2
 public interface ServerHandlerInterface {
 
 	// CONFIGURATION FILE CONTAINS:

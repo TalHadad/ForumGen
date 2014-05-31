@@ -45,9 +45,9 @@ public interface ServerHandlerInterface {
 
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)
 	// server side has to check if the response content matches the sub forum subject
-	public String postThreadResponse(String responseContent,
-			String currentThreadTitle, String forumName,
-			String subForumName, String userName, String id);
+	public String postThreadResponse(String responseTitle,
+			String responseContent, String forumName,
+			String subForumName, String userName, String ThreadID);
 
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)
 	public String deleteThread(String id, String subForum, String Forum);

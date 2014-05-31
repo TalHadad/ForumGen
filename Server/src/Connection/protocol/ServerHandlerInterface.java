@@ -1,10 +1,10 @@
 package Connection.protocol;
-//Fina3
+//Final
 public interface ServerHandlerInterface {
 
 	// CONFIGURATION FILE CONTAINS:
 	// delim1, delim2, SUCCESS, FAIL, 
-	//11 14
+
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////// SYSTEM /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,17 +32,6 @@ public interface ServerHandlerInterface {
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)
 	public String loginSuper(String userName, String password) ;
 
-	// 6*
-	// expecting to receive (conf.SUCCESS msg)
-	// need to set the policy while creating a new forum	
-	public String createForum(String forumName, String userName, String hasEmailPolicy, String extendedDeletionPolicy,
-								String minPostForModerator, String minSeniorityMonths, String onlyApointAdministratorCanRemoveModerators, 
-								String canRemoveSingleModerators, String expirationDateForPassword);
-
-	// 7*
-	// expecting to receive (conf.SUCCESS msg|| conf.FAIL msg)
-	public String deleteForum(String forumName);
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////// FORUM /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -55,7 +44,7 @@ public interface ServerHandlerInterface {
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg || conf.PENDING) 
 	// decided by forum policy. might get pending until validation by mail.
 	public String registerToForum(String userName, String forumName,
-			String password, String email, String remainderQues, String remainderAns);
+			String password, String Email, String remainderQues, String remainderAns);
 
 	// 3
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg || conf.PENDING)
@@ -90,22 +79,31 @@ public interface ServerHandlerInterface {
 	public String replaceAdmin (String userName, String forum, String newAdminUserName);
 	
 	// 10
-	// expecting to return all the posts names separeted by conf.delim1
+	// expecting to receive (conf.SUCCESS msg|| conf.FAIL msg)
 	//<userName> is Admin, return all type of posts
 	public String postsOfMemberReport (String userName, String forum, String memberName);
+
+	// 11
+	// expecting to receive (conf.SUCCESS msg|| conf.FAIL msg)
+	// need to set the policy while creating a new forum
+	public String createForum(String forumName, String userName, String policy);
 
 	// 12
 	// expecting to receive (conf.SUCCESS msg|| conf.FAIL msg)
 	// interactiveNotifyingPolicy can be online offline or selective, only.
 	// *** need to check what is suspention policy for members described in the first demand form. ***
 	public String setPolicy(String forumName, String userName, String hasEmailPolicy, String extendedDeletionPolicy,
-			String minPostForModerator, String minSeniorityMonths, String onlyApointAdministratorCanRemoveModerators, 
-			String canRemoveSingleModerators, String expirationDateForPassword, String interactiveNotifyingPolicys);
+			String policyForUpdatingRank, String minPostForModerator, String minSeniorityMonths, String onlyApointAdministratorCanRemoveModerators, 
+			String canRemoveSingleModerators, String expirationDateForPassword, String interactiveNotifyingPolicyS);
 
 	// 13
 	// only superAdmin can execute this func.
 	// expecting to receive a list of member names seperated by conf.delim1
 	public String membersOfForum(String forumName);
+
+	// 14
+	// expecting to receive (conf.SUCCESS msg|| conf.FAIL msg)
+	public String deleteForum(String forumName);
 
 	// 15
 	// expecting to receive (conf.SUCCESS msg|| conf.FAIL msg)
@@ -123,10 +121,6 @@ public interface ServerHandlerInterface {
     // 18
     // expecting to receive (conf.SUCCESS msg|| conf.FAIL msg)	
     public String isAdmin (String userName, String forumName);
-
-	// 18.5
-    //expecting to return a list of admin separated by conf.delim1
-    public String getAllAdminsInForum(String forumName);
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -187,10 +181,6 @@ public interface ServerHandlerInterface {
     // expecting to receive (conf.SUCCESS msg|| conf.FAIL msg)	    
     public String isModerator (String userName, String forumName, String subforumName);
 
-	// 30.5
-    //expecting to return a list of moderators separated by conf.delim1
-    public String getAllModerators(String forumName, String subForumName);
-
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////// THREAD //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -213,7 +203,7 @@ public interface ServerHandlerInterface {
 	
 	// 34
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)
-	public String deleteThread(String treadID, String subForum, String forum);
+	public String deleteThread(String id, String subForum, String Forum);
 
 	// 35
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)
@@ -230,9 +220,9 @@ public interface ServerHandlerInterface {
 	// 37
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)
 	// server side has to check if the response content matches the sub forum subject
-	public String postThreadResponse(String responseTitle,
-			String responseContent, String forumName,
-			String subForumName, String userName, String openningThreadID);
+	public String postThreadResponse(String responseContent,
+			String currentThreadTitle, String forumName,
+			String subForumName, String userName, String id);
 
 	// 38
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)			NEED TO CHECK ID
@@ -279,7 +269,4 @@ public interface ServerHandlerInterface {
 
 	//public String enterNewProperty(String forumName,String property, String newValue, String userName, String password) ;
 	
-	
-        
-    
 }

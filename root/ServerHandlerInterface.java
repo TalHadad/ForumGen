@@ -1,5 +1,5 @@
 package Connection.protocol;
-//Final2
+//Final
 public interface ServerHandlerInterface {
 
 	// CONFIGURATION FILE CONTAINS:
@@ -34,8 +34,10 @@ public interface ServerHandlerInterface {
 
 	// 6*
 	// expecting to receive (conf.SUCCESS msg)
-	// need to set the policy while creating a new forum
-	public String createForum(String forumName, String userName, String policy);
+	// need to set the policy while creating a new forum	
+	public String createForum(String forumName, String userName, String hasEmailPolicy, String extendedDeletionPolicy,
+								String minPostForModerator, String minSeniorityMonths, String onlyApointAdministratorCanRemoveModerators, 
+								String canRemoveSingleModerators, String expirationDateForPassword);
 
 	// 7*
 	// expecting to receive (conf.SUCCESS msg|| conf.FAIL msg)
@@ -53,7 +55,7 @@ public interface ServerHandlerInterface {
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg || conf.PENDING) 
 	// decided by forum policy. might get pending until validation by mail.
 	public String registerToForum(String userName, String forumName,
-			String password, String Email, String remainderQues, String remainderAns);
+			String password, String email, String remainderQues, String remainderAns);
 
 	// 3
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg || conf.PENDING)
@@ -211,7 +213,7 @@ public interface ServerHandlerInterface {
 	
 	// 34
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)
-	public String deleteThread(String id, String subForum, String Forum);
+	public String deleteThread(String treadID, String subForum, String forum);
 
 	// 35
 	// expecting to receive (conf.SUCCESS: msg || conf.FAIL: msg)

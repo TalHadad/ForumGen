@@ -1,5 +1,5 @@
 package TestPackage;
-
+//Final
 public interface ServerHandlerInterface {
 
 	// CONFIGURATION FILE CONTAINS:
@@ -31,7 +31,7 @@ public interface ServerHandlerInterface {
 	public String getThreadContent(String treadID, String subForumName, String forumName);
 
 	// returns the content of a post specified by ID(unique by subForum)
-	public String getResponseContent(String treadID, String responseId, String id, String subForumName, String forumName);
+	public String getResponseContent(String treadID, String responseID, String subForumName, String forumName);
 
 	// entering to the post will return string of pairs, post title delim2 id, pairs are separeted by conf.delim1
 	// sending ID of the openning post.
@@ -132,7 +132,7 @@ public interface ServerHandlerInterface {
 
 	// expecting to receive (conf.SUCCESS msg|| conf.FAIL msg)
 	// need to set the policy while creating a new forum
-	public String createForum(String forumName, String userName, String policy, String security);
+	public String createForum(String forumName, String userName, String policy);
 	
 	// expecting to receive (conf.SUCCESS msg|| conf.FAIL msg)
 	// interactiveNotifyingPolicy can be online offline or selective, only.

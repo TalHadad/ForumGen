@@ -20,6 +20,12 @@ public class Configuration {
 	public static final int CONNECTED = 1;
 	public static final int DISCONNECTED = 2;
 	public static final int PENDING = 3;
+
+	public static final String DELIMITER1 = "@@";
+	public static final String DELIMITER2 = "!!";
+
+	public static final String IP = "192.168.1.104";
+    public static final int PORT = 8889;
 	
 	public static final String DisplayForums = "DisplayForums";
 	public static final String registerToForum = "registerToForum";

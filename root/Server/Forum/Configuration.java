@@ -30,6 +30,9 @@ public class Configuration {
 	public static final String FAIL = "FAIL";
 	public static final String SUCCESS = "SUCCESS";
 	
+	public static final String DELIMITER1 = "@@";
+	public static final String DELIMITER2 = "!!";
+
 	
 	public static final int CONNECTED = 1;
 	public static final int DISCONNECTED = 2;

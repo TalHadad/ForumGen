@@ -1,5 +1,6 @@
 package Server.Forum;
 
+import java.awt.image.ConvolveOp;
 import java.util.Vector;
 
 import Server.Users.*;
@@ -33,9 +34,9 @@ public class Forum {
 		super();
 		this.name = name;
 		this.subForums = subForums;
-		this.members = members;
+		this.members = new Vector<Member>();
 		this.policy = policy;
-		this.admins = admins;
+		this.admins = new Vector<String>();
 		this.security= security;
 		this.statuses = statuses;
 	}

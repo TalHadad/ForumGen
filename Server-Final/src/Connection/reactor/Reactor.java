@@ -196,7 +196,7 @@ public class Reactor<T> implements Runnable {
 	 */
 	public static void main(String args[]) {
 		try {
-			int port = 8889;
+			int port = 8888;
 			int poolSize = 7;
 			
 			Reactor<StringMessage> reactor = startEchoServer(port, poolSize);

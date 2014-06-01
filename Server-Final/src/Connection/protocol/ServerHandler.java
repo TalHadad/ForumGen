@@ -1,10 +1,15 @@
 package Connection.protocol;
 import java.util.Vector;
 
-import Configuration.*;
+import Configuration.Configuration;
 import Server.Forum.*;
+import Server.Forum.ForumGen;
+import Server.Forum.Policy;
+import Server.Forum.QuestionAnswerPair;
+import Server.Forum.SubForum;
+import Server.Posts.FollowPost;
+import Server.Posts.OpeningPost;
 import Server.Users.*;
-import Server.Posts.*;
 
 
 public class ServerHandler implements ServerHandlerInterface{
@@ -30,11 +35,16 @@ public class ServerHandler implements ServerHandlerInterface{
 	@Override
 	// Checks if Super admin and create a ForumGen Object and save it as a field
 	public String initializeSystem (String userName, String password) {
+		System.out.println("username -" + userName);
+		System.out.println("password -" + password);
 		if(userName.compareTo(Configuration.superAdminName)==0 &&
 				password.compareTo(Configuration.superAdminPassword)==0){
+			System.out.println("success");
 			this.forumSystem = new ForumGen();
 			return Configuration.SUCCESS+Configuration.DELIMITER1+"The system is initialized successully." ;
 		}
+		else
+		System.out.println("fail");
 		return Configuration.FAIL+Configuration.DELIMITER1+"Unauthorized user.";
 	}
 
@@ -92,9 +102,13 @@ public class ServerHandler implements ServerHandlerInterface{
 
 		Policy policy = new Policy(hasEmailPolicy1, extendedDeletionPolicy1 , minPostForModerator1, minSeniorityMonths1, 
 									onlyApointAdministratorCanRemoveModerators1, canRemoveSingleModerators1, expirationDateForPassword1);
-		boolean seccess = this.forumSystem.createForum(forumName,policy);
-		if (seccess)
+		Forum forum = this.forumSystem.createForum(forumName,policy);
+		if (forum != null){
+			Member admin = new Member(Configuration.superAdminName, forum);
+			admin.setStatus(Configuration.CONNECTED);
+			forum.addMember(admin);
 			return Configuration.SUCCESS+Configuration.DELIMITER1+forumName+"forum created a successfull";
+		}
 		return Configuration.FAIL+Configuration.DELIMITER1+"Fail to create "+forumName+" forum";
 	}
 

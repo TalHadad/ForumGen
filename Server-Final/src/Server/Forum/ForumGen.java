@@ -17,12 +17,13 @@ public class ForumGen {
 	
 	//when creating a forum the super administrator is the admin because there are no members in, yet..
 	//after adding some members he will be able to advance a member to a admin mode.
-	public Boolean createForum(String forumName, Policy policy){
-		if(forumName == null) return false;
+	public Forum createForum(String forumName, Policy policy){
+		if(forumName == null) return null;
 		Forum forum = new Forum(forumName, null, null, policy, null, null,null);
+		
 		this.forums.add(forum);
 		System.out.println("forums size; "+this.forums.size());
-		return true;	// created a new forum successfully (need to wrap with try & catch)
+		return forum;	// created a new forum successfully (need to wrap with try & catch)
 	}
 	
 	public Vector<String> displayForums(){
@@ -35,16 +36,13 @@ public class ForumGen {
 	}
 	
 	public Forum getForum(String name){
-		
 		Forum ans = null;
-		
 		for (int i = 0; i < forums.size(); i++){
 			if (forums.elementAt(i).getForumName().compareTo(name) == 0){
 				ans = forums.elementAt(i);
 				break;
 			}
 		}
-		
 		return ans;
 	}
 	

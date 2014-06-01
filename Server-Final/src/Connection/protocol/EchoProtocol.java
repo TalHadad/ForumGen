@@ -92,7 +92,8 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 			else if (msg.startsWith(Configuration.validateSuperAdmin)){ans =handle_validateSuperAdmin(msg,client);}
 		//	else if (msg.startsWith(Configuration.notifyMember)){ans =handle_notifyMember(msg,client);}
 		//	else if (msg.startsWith(Configuration.notifyFreindRequest)){ans =handle_notifyFreindRequest(msg,client);}
-			ans = Configuration.FAIL;
+			else
+				ans = Configuration.FAIL;
 		}
 		StringMessage SM=new StringMessage(ans);
 		return SM;
@@ -177,15 +178,16 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String password= parsedMsg[3];
 		String Email= parsedMsg[4];
 		String remainderQues= parsedMsg[5];
-		String remainderAns= parsedMsg[6];
+		String remainderAns= parsedMsg[6].substring(0, parsedMsg[6].length()-1); 
+
 		return this.serverHandler.registerToForum(currentForum, userName, password, Email, remainderQues, remainderAns);
 	}
 	
 	// <Conf.createForum> <DELIM1> <forumName> <DELIM1> <userName> <DELIM1> <policy>
 	private String handle_createForum(String msg, Client client) {
 		String[] parsedMsg =  msg.split(Configuration.DELIMITER1);
-		if (parsedMsg.length != 4){
-			System.out.println("Got a createForum, but not with 3 params");
+		if (parsedMsg.length != 10){
+			System.out.println("Got a createForum, but not with 9 params");
 			return Configuration.FAIL;
 		}
 
@@ -197,7 +199,8 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String minSeniorityMonths=parsedMsg[6];
 		String onlyApointAdministratorCanRemoveModerators=parsedMsg[7];
 		String canRemoveSingleModerators=parsedMsg[8];
-		String expirationDateForPassword=parsedMsg[9];
+		String expirationDateForPassword=parsedMsg[9].substring(0, parsedMsg[9].length()-1); 
+
 
 		return this.serverHandler.createForum( forumName,  userName,  hasEmailPolicy,  extendedDeletionPolicy,
 				 minPostForModerator,  minSeniorityMonths,  onlyApointAdministratorCanRemoveModerators, 
@@ -212,7 +215,8 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 			return Configuration.FAIL;
 		}
 
-		String forumName=parsedMsg[1];
+		String forumName=parsedMsg[1].substring(0, parsedMsg[1].length()-1); 
+
 
 		return this.serverHandler.deleteForum(forumName);
 	}
@@ -229,7 +233,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String subForumName=parsedMsg[2];
 		String subject=parsedMsg[3];
 		String moderatorUserName=parsedMsg[4];
-		String userName=parsedMsg[5];
+		String userName=parsedMsg[5].substring(0, parsedMsg[5].length()-1); 
 		return this.serverHandler.createSubForum(ForumName, subForumName, subject, moderatorUserName, userName);
 	}
 	
@@ -242,7 +246,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		}
 
 		String forumName=parsedMsg[1];
-		String subForumName=parsedMsg[2];
+		String subForumName=parsedMsg[2].substring(0, parsedMsg[2].length()-1); 
 		return this.serverHandler.deleteSubForum(forumName, subForumName);
 	}
 	
@@ -255,7 +259,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		}
 
 		String currentForum = parsedMsg[1];
-		String userName = parsedMsg[2];
+		String userName = parsedMsg[2].substring(0, parsedMsg[2].length()-1); 
 		return this.serverHandler.logout(currentForum, userName);
 	}
 	
@@ -307,7 +311,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		}
 
 		String userName=parsedMsg[1];
-		String password=parsedMsg[2];
+		String password=parsedMsg[2].substring(0, parsedMsg[2].length()-1); 
 		return this.serverHandler.validateSuperAdmin(userName, password);
 	}
 	
@@ -331,7 +335,8 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		}
 
 		String userName=parsedMsg[1];
-		String password=parsedMsg[2];
+		String password=parsedMsg[2].substring(0, parsedMsg[2].length()-1);
+		System.out.println("handle init");
 		return this.serverHandler.initializeSystem(userName, password);
 	}
 
@@ -345,7 +350,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 
 		String userName = parsedMsg[1];
 		String forumName = parsedMsg[2];
-		String SubforumName = parsedMsg[3];
+		String SubforumName = parsedMsg[3].substring(0, parsedMsg[3].length()-1); 
 		
 		return this.serverHandler.isModerator(userName, forumName, SubforumName);
 	}
@@ -359,7 +364,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		}
 
 		String userName = parsedMsg[1];
-		String forumName = parsedMsg[2];
+		String forumName = parsedMsg[2].substring(0, parsedMsg[2].length()-1); 
 		
 		return this.serverHandler.isAdmin(userName, forumName);
 	}
@@ -373,7 +378,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		}
 
 		String userName = parsedMsg[1];
-		String forumName = parsedMsg[2];
+		String forumName = parsedMsg[2].substring(0, parsedMsg[2].length()-1); 
 		
 		return this.serverHandler.isMember(userName, forumName);
 	}
@@ -388,7 +393,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 
 		String userName = parsedMsg[1];
 		String forumName = parsedMsg[2];
-		String type = parsedMsg[3];
+		String type = parsedMsg[3].substring(0, parsedMsg[3].length()-1); 
 		
 		return this.serverHandler.createType(userName, forumName, type);
 	}
@@ -404,7 +409,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String userName = parsedMsg[1];
 		String forumName = parsedMsg[2];
 		String type = parsedMsg[3];
-		String memberToUpdate = parsedMsg[4];
+		String memberToUpdate = parsedMsg[4].substring(0, parsedMsg[4].length()-1); 
 		
 		return this.serverHandler.updateMemberType(userName, forumName, type, memberToUpdate);
 	}
@@ -417,7 +422,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 			return Configuration.FAIL;
 		}
 
-		String forumName = parsedMsg[1];
+		String forumName = parsedMsg[1].substring(0, parsedMsg[1].length()-1); 
 		return this.serverHandler.membersOfForum(forumName);
 	}
 	
@@ -449,7 +454,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String onlyApointAdministratorCanRemoveModerators = parsedMsg[7];
 		String canRemoveSingleModerators = parsedMsg[8];
 		String expirationDateForPassword = parsedMsg[9];
-		String interactiveNotifyingPolicys = parsedMsg[10];		
+		String interactiveNotifyingPolicys = parsedMsg[10].substring(0, parsedMsg[10].length()-1); 
 		
 		return this.serverHandler.setPolicy( forumName,  userName,
 				 hasEmailPolicy,  extendedDeletionPolicy,  minPostForModerator,
@@ -466,7 +471,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		}
 
 		String userName = parsedMsg[1];
-		String forumName = parsedMsg[2];
+		String forumName = parsedMsg[2].substring(0, parsedMsg[2].length()-1); 
 		
 		return this.serverHandler.listOfModeratorsReport(userName, forumName);
 
@@ -482,7 +487,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 
 		String userName = parsedMsg[1];
 		String forum = parsedMsg[2];
-		String memberName = parsedMsg[2];
+		String memberName = parsedMsg[3].substring(0, parsedMsg[3].length()-1); 
 		
 		return this.serverHandler.postsOfMemberReport(userName, forum, memberName);
 
@@ -498,7 +503,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 
 		String userName = parsedMsg[1];
 		String forum = parsedMsg[2];
-		String subForum = parsedMsg[3];
+		String subForum = parsedMsg[3].substring(0, parsedMsg[3].length()-1); 
 		
 		return this.serverHandler.numOfPostsInSubForumReport(userName, forum, subForum);
 
@@ -517,7 +522,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String forum = parsedMsg[2];
 		String subForum = parsedMsg[3];
 		String newModeratorName = parsedMsg[4];
-		String oldModerator = parsedMsg[5];
+		String oldModerator = parsedMsg[5].substring(0, parsedMsg[5].length()-1); 
 		
 		return this.serverHandler.replaceModerator( userName,  forum,  subForum,
 				 newModeratorName,  oldModerator);
@@ -534,7 +539,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 
 		String userName = parsedMsg[1];
 		String forum = parsedMsg[2];
-		String newAdminUserName = parsedMsg[3];
+		String newAdminUserName = parsedMsg[3].substring(0, parsedMsg[3].length()-1); 
 		
 		return this.serverHandler.replaceAdmin(userName, forum, newAdminUserName);
 
@@ -551,7 +556,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String userName = parsedMsg[1];
 		String forum = parsedMsg[2];
 		String subForum = parsedMsg[3];
-		String moderatorUserName = parsedMsg[4];
+		String moderatorUserName = parsedMsg[4].substring(0, parsedMsg[4].length()-1); 
 		
 		return this.serverHandler.removeModerator(userName, forum, subForum, moderatorUserName);
 
@@ -568,7 +573,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String userName = parsedMsg[1];
 		String forum = parsedMsg[2];
 		String subForum = parsedMsg[3];
-		String moderatorUserName = parsedMsg[4];
+		String moderatorUserName = parsedMsg[4].substring(0, parsedMsg[4].length()-1); 
 		
 		return this.serverHandler.banModerator(userName, forum, subForum, moderatorUserName);
 
@@ -585,7 +590,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String userName = parsedMsg[1];
 		String forum = parsedMsg[2];
 		String subForum = parsedMsg[3];
-		String moderatorUserName = parsedMsg[4];
+		String moderatorUserName = parsedMsg[4].substring(0, parsedMsg[4].length()-1); 
 		
 		return this.serverHandler.upgradeToModerator(userName, forum, subForum, moderatorUserName);
 
@@ -604,7 +609,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String subForum = parsedMsg[3];
 		String openningPostID = parsedMsg[4];
 		String responseID = parsedMsg[5];
-		String newText = parsedMsg[6];
+		String newText = parsedMsg[6].substring(0, parsedMsg[6].length()-1); 
 		
 		return this.serverHandler.editResponse(userName, forum, subForum, openningPostID, responseID, newText);
 
@@ -622,7 +627,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String forum = parsedMsg[2];
 		String subForum = parsedMsg[3];
 		String treadID = parsedMsg[4];
-		String newText = parsedMsg[5];
+		String newText = parsedMsg[5].substring(0, parsedMsg[5].length()-1); 
 		
 		return this.serverHandler.editTread(userName, forum, subForum, treadID, newText);
 
@@ -638,7 +643,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 
 		String userName = parsedMsg[1];
 		String forumName = parsedMsg[2];
-		String memberToBanName = parsedMsg[3];
+		String memberToBanName = parsedMsg[3].substring(0, parsedMsg[3].length()-1); 
 		
 		return this.serverHandler.banMember(userName, forumName, memberToBanName);
 
@@ -655,7 +660,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 
 		String userName = parsedMsg[1];
 		String userNameResponser = parsedMsg[2];
-		String response = parsedMsg[3];
+		String response = parsedMsg[3].substring(0, parsedMsg[3].length()-1); 
 		
 		return this.serverHandler.responseToFreindRequest(userName, userNameResponser, response);
 
@@ -671,7 +676,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 
 		String userName = parsedMsg[1];
 		String forumName = parsedMsg[2];
-		String friendUserName = parsedMsg[3];
+		String friendUserName = parsedMsg[3].substring(0, parsedMsg[3].length()-1); 
 		
 		return this.serverHandler.removeFriend(userName, forumName, friendUserName);
 
@@ -687,7 +692,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 
 		String forumName = parsedMsg[1];
 		String userName = parsedMsg[2];
-		String friendUserName = parsedMsg[3];
+		String friendUserName = parsedMsg[3].substring(0, parsedMsg[3].length()-1); 
 		
 		return this.serverHandler.addFriend(forumName, userName, friendUserName);
 
@@ -703,7 +708,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 
 		String userName = parsedMsg[1];
 		String forumName = parsedMsg[2];
-		String code = parsedMsg[3];
+		String code = parsedMsg[3].substring(0, parsedMsg[3].length()-1); 
 		
 		
 		return this.serverHandler.validateByEmail( userName,  forumName,  code);
@@ -719,7 +724,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		}
 
 		String forumName = parsedMsg[1];
-		String adminName = parsedMsg[2];
+		String adminName = parsedMsg[2].substring(0, parsedMsg[2].length()-1); 
 		
 		return this.serverHandler.removeAdminFromForum(forumName, adminName);
 
@@ -734,7 +739,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		}
 
 		String forumName = parsedMsg[1];
-		String adminName = parsedMsg[2];
+		String adminName = parsedMsg[2].substring(0, parsedMsg[2].length()-1); 
 		
 		return this.serverHandler.addAdminToForum(forumName, adminName);
 
@@ -749,7 +754,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		}
 
 		String forumName = parsedMsg[1];
-		String moderatorUserName = parsedMsg[2];
+		String moderatorUserName = parsedMsg[2].substring(0, parsedMsg[2].length()-1); 
 		
 		return this.serverHandler.getSubForumsForModerator(forumName, moderatorUserName);
 
@@ -768,7 +773,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String moderatorUsername = parsedMsg[3];
 		String complaint = parsedMsg[4];
 		String userName = parsedMsg[5];
-		String password = parsedMsg[6];
+		String password = parsedMsg[6].substring(0, parsedMsg[6].length()-1); 
 		
 		return this.serverHandler.fileComplaint(currentForum, currentSubForum, moderatorUsername, complaint, userName, password);
 
@@ -785,7 +790,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String postID = parsedMsg[1];
 		String responseID = parsedMsg[2];
 		String forumName = parsedMsg[3];
-		String subForumName = parsedMsg[4];
+		String subForumName = parsedMsg[4].substring(0, parsedMsg[4].length()-1); 
 		
 		return this.serverHandler.deleteThreadResponse(postID, responseID, forumName, subForumName);
 
@@ -801,7 +806,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 
 		String ID = parsedMsg[1];
 		String subForum = parsedMsg[2];
-		String Forum = parsedMsg[3];
+		String Forum = parsedMsg[3].substring(0, parsedMsg[3].length()-1); 
 		
 		return this.serverHandler.deleteThread(ID, subForum, Forum);
 
@@ -821,7 +826,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String currentForum = parsedMsg[3];
 		String currentSubForum = parsedMsg[4];
 		String userName = parsedMsg[5];
-		String title = parsedMsg[6];
+		String title = parsedMsg[6].substring(0, parsedMsg[6].length()-1); 
 		
 		return this.serverHandler.postThreadResponse(responseContent, currentThreadTitle, currentForum, currentSubForum, userName, title);
 
@@ -839,7 +844,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String subForumName = parsedMsg[2];
 		String threadTitle = parsedMsg[3];
 		String threadContent = parsedMsg[4];
-		String userName = parsedMsg[5];
+		String userName = parsedMsg[5].substring(0, parsedMsg[5].length()-1); 
 		
 		return this.serverHandler.publishNewThread(forumName, subForumName, threadTitle, threadContent, userName);
 
@@ -855,7 +860,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 
 		String currentForum = parsedMsg[1];
 		String currentSubForum = parsedMsg[2];
-		String currentThreadTitle = parsedMsg[3];
+		String currentThreadTitle = parsedMsg[3].substring(0, parsedMsg[3].length()-1); 
 		
 		return this.serverHandler.getThreadResponses(currentForum, currentSubForum, currentThreadTitle);
 
@@ -872,7 +877,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		String treadID = parsedMsg[1];
 		String responseID = parsedMsg[2];
 		String subForumName = parsedMsg[3];
-		String forumName = parsedMsg[4];
+		String forumName = parsedMsg[4].substring(0, parsedMsg[4].length()-1); 
 		
 		return this.serverHandler.getResponseContent(treadID, responseID, subForumName, forumName);
 
@@ -887,7 +892,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 		}
 
 		String currentForum = parsedMsg[1];
-		String currentSubForum = parsedMsg[2];
+		String currentSubForum = parsedMsg[2].substring(0, parsedMsg[2].length()-1); 
 		
 		return this.serverHandler.getThreads(currentForum, currentSubForum);
 
@@ -901,7 +906,7 @@ public class EchoProtocol implements AsyncServerProtocol<StringMessage> {
 			return Configuration.FAIL;
 		}
 
-		String forumName = parsedMsg[1];
+		String forumName = parsedMsg[1].substring(0, parsedMsg[1].length()-1); 
 		
 		return this.serverHandler.getSubForums(forumName);
 
